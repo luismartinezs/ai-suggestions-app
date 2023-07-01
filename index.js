@@ -2,15 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Configuration, OpenAIApi } = require('openai');
+require('dotenv').config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 const app = express();
 
-// Use bodyParser to parse JSON bodies
 app.use(bodyParser.json());
 
-// Enable CORS
 app.use(cors());
 
 app.post('/api/ai-suggestions', async (req, res) => {
@@ -36,7 +35,7 @@ app.post('/api/ai-suggestions', async (req, res) => {
     const openai = new OpenAIApi(configuration);
 
     const completion = await openai.createChatCompletion({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',//'gpt-4',
       messages: [
         {
           role: 'system',
