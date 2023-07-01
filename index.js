@@ -5,6 +5,7 @@ const { Configuration, OpenAIApi } = require('openai');
 require('dotenv').config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4'
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.post('/api/ai-suggestions', async (req, res) => {
     const openai = new OpenAIApi(configuration);
 
     const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',//'gpt-4',
+      model: OPENAI_MODEL,
       messages: [
         {
           role: 'system',
